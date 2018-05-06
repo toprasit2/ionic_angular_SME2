@@ -22,9 +22,22 @@ export class HomePage {
     //   }
     // })
     let ref = this.db.list('todos')
-      ref.valueChanges().subscribe((datas)=>{
+      // ref.valueChanges().subscribe((datas)=>{
+      //   console.log(datas)
+      //   this.items = datas
+      // },(err)=>{
+      //   console.log(err)
+      // })
+      ref.snapshotChanges().subscribe((datas)=>{
         console.log(datas)
-        this.items = datas
+        //this.items = datas
+        let tempItem = []
+        _.forEach(datas, (data)=>{
+          let value = data.payload.val();
+          let item = {id: data.key, title: value.title, description: value.description}
+          tempItem.push(item)
+        })
+        this.items = tempItem
       },(err)=>{
         console.log(err)
       })
@@ -64,10 +77,11 @@ export class HomePage {
 
   removeItem(removeItem){
     //console.log(item.title + ' removed')
-    _.remove(this.items, (item) =>{
-      return item.title == removeItem.title
-    })
-    this.dataProvider.save(this.items)
+    // _.remove(this.items, (item) =>{
+    //   return item.title == removeItem.title
+    // })
+    // this.dataProvider.save(this.items)
+    this.db.list('todos').remove(removeItem.id)
   }
 
 }
