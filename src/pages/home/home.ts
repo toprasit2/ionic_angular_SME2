@@ -3,7 +3,7 @@ import { NavController, ModalController } from 'ionic-angular';
 import { AddItemPage } from '../add-item/add-item';
 import { ViewItemPage } from '../view-item/view-item';
 import { DataProvider } from '../../providers/data/data';
-
+import * as _ from 'lodash'
 
 
 @Component({
@@ -54,5 +54,12 @@ export class HomePage {
     })
   }
 
+  removeItem(removeItem){
+    //console.log(item.title + ' removed')
+    _.remove(this.items, (item) =>{
+      return item.title == removeItem.title
+    })
+    this.dataProvider.save(this.items)
+  }
 
 }
