@@ -6,9 +6,12 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { SettingPage } from '../pages/setting/setting';
+import { AddItemPage } from '../pages/add-item/add-item';
+import { ViewItemPage } from '../pages/view-item/view-item';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+
 
 
 @NgModule({
@@ -16,7 +19,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MyApp,
     HomePage,
     ListPage,
-    SettingPage
+    SettingPage,
+    AddItemPage,
+    ViewItemPage
   ],
   imports: [
     BrowserModule,
@@ -27,7 +32,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MyApp,
     HomePage,
     ListPage,
-    SettingPage
+    SettingPage,
+    AddItemPage,
+    ViewItemPage
   ],
   providers: [
     StatusBar,
