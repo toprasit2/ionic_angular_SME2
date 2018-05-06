@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 import { AddItemPage } from '../add-item/add-item';
 import { ViewItemPage } from '../view-item/view-item';
+import { DataProvider } from '../../providers/data/data';
 
 
 
@@ -12,8 +13,13 @@ import { ViewItemPage } from '../view-item/view-item';
 export class HomePage {
   items:any;
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public dataProvider: DataProvider) {
     console.log("constructor")
+    this.dataProvider.getData().then((todos)=>{
+      if(todos){
+        this.items = todos
+      }
+    })
   }
 
   ngOnInit(){
@@ -46,4 +52,6 @@ export class HomePage {
       item: item
     })
   }
+
+
 }
