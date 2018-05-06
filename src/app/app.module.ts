@@ -15,6 +15,17 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { DataProvider } from '../providers/data/data';
 import { HttpClientModule } from '@angular/common/http';
 
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireModule } from 'angularfire2';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDPIqKJu1AMNcRZGenhkjSGEsWYCLLS0r8",
+  authDomain: "todo-ab486.firebaseapp.com",
+  databaseURL: "https://todo-ab486.firebaseio.com",
+  projectId: "todo-ab486",
+  storageBucket: "todo-ab486.appspot.com",
+  messagingSenderId: "924296360904"
+};
 
 
 @NgModule({
@@ -31,6 +42,8 @@ import { HttpClientModule } from '@angular/common/http';
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     HttpClientModule,
+    AngularFireDatabaseModule,
+    AngularFireModule.initializeApp(firebaseConfig)
   ],
   bootstrap: [IonicApp],
   entryComponents: [

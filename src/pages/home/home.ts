@@ -4,6 +4,7 @@ import { AddItemPage } from '../add-item/add-item';
 import { ViewItemPage } from '../view-item/view-item';
 import { DataProvider } from '../../providers/data/data';
 import * as _ from 'lodash'
+import { AngularFireDatabase } from 'angularfire2/database';
 
 
 @Component({
@@ -13,13 +14,20 @@ import * as _ from 'lodash'
 export class HomePage {
   items:any=[];
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public dataProvider: DataProvider) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public dataProvider: DataProvider, public db: AngularFireDatabase) {
     //console.log("constructor")
-    this.dataProvider.getData().then((todos)=>{
-      if(todos){
-        this.items = todos
-      }
-    })
+    // this.dataProvider.getData().then((todos)=>{
+    //   if(todos){
+    //     this.items = todos
+    //   }
+    // })
+    let ref = this.db.list('todos')
+      ref.valueChanges().subscribe((datas)=>{
+        console.log(datas)
+        this.items = datas
+      },(err)=>{
+        console.log(err)
+      })
   }
 
   ngOnInit(){
@@ -38,8 +46,8 @@ export class HomePage {
     addModal.onDidDismiss((item)=>{
       if(item){
         if(item.title && item.description){
-          this.items.push(item)
-          this.dataProvider.save(this.items)
+          //this.items.push(item)
+          this.dataProvider.save(item)
         }
         else
           alert("information not correct")
