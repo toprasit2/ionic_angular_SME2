@@ -11,10 +11,10 @@ import { DataProvider } from '../../providers/data/data';
   templateUrl: 'home.html'
 })
 export class HomePage {
-  items:any;
+  items:any=[];
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public dataProvider: DataProvider) {
-    console.log("constructor")
+    //console.log("constructor")
     this.dataProvider.getData().then((todos)=>{
       if(todos){
         this.items = todos
@@ -23,12 +23,12 @@ export class HomePage {
   }
 
   ngOnInit(){
-    console.log("ngOnInit")
-    this.items = [
-      {title: 'Hi', description: 'test1'},
-      {title: 'Hi_2', description: 'test2'},
-      {title: 'Hi_3', description: 'test3'}
-    ]
+    //console.log("ngOnInit")
+    // this.items = [
+    //   {title: 'Hi', description: 'test1'},
+    //   {title: 'Hi_2', description: 'test2'},
+    //   {title: 'Hi_3', description: 'test3'}
+    // ]
   }
 
   addItem(){
@@ -39,6 +39,7 @@ export class HomePage {
       if(item){
         if(item.title && item.description){
           this.items.push(item)
+          this.dataProvider.save(this.items)
         }
         else
           alert("information not correct")
