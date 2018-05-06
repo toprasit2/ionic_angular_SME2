@@ -14,12 +14,20 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'view-item.html',
 })
 export class ViewItemPage {
-
+  title: string ;
+  description: string;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ViewItemPage');
+    //console.log('ionViewDidLoad ViewItemPage');
+    let item = this.navParams.get('item');
+    this.title = item.title
+    this.description = item.description
+  }
+
+  back(){
+    this.navCtrl.pop()
   }
 
 }

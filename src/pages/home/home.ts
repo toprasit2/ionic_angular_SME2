@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 import { AddItemPage } from '../add-item/add-item';
+import { ViewItemPage } from '../view-item/view-item';
 
 
 
@@ -36,6 +37,13 @@ export class HomePage {
         else
           alert("information not correct")
       }
+    })
+  }
+
+  viewItem(item){
+    console.log("view "+item.description)
+    this.navCtrl.push(ViewItemPage,{
+      item: item
     })
   }
 }
